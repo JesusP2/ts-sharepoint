@@ -1,0 +1,29 @@
+{
+  "name": "ts-sharepoint",
+  "version": "0.0.1",
+  "description": "Typesafe sharepoint library",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "test": "tsx --experimental-test-coverage --test **/__test__.ts",
+    "test:watch": "tsx --test **/__test__.ts",
+    "lint": "eslint index.ts",
+    "format": "prettier --write --experimental-ternaries ./src"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^20.8.9",
+    "@typescript-eslint/eslint-plugin": "^6.9.0",
+    "@typescript-eslint/parser": "^6.9.0",
+    "eslint": "^8.52.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^5.0.1",
+    "tsx": "^3.14.0",
+    "typescript": "^5.2.2",
+    "prettier": "^3.1.0"
+  }
+}
