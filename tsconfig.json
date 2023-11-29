@@ -1,20 +1,27 @@
 {
   "$schema": "https://json.schemastore.org/tsconfig",
   "compilerOptions": {
-    "lib": ["ES2023"],
-    "target": "ES2022",
-    "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true,
+    "verbatimModuleSyntax": true,
+    "resolveJsonModule": true,
+    "moduleDetection": "force",
+    "lib": [
+      "ES2023"
+    ] /* Specify a set of bundled library declaration files that describe the target runtime environment. */,
+    "target": "ES6" /* Set the JavaScript language version for emitted JavaScript and include compatible library declarations. */,
+    "strict": true,
     "noUncheckedIndexedAccess": true,
-    "moduleResolution": "Bundler",
-    "module": "ESNext",
-    "declaration": true,
+    "moduleResolution": "Bundler" /* Specify how TypeScript looks up a file from a given module specifier. */,
+    "module": "ESNext" /* Specify what module code is generated. */,
     "noEmit": true,
+    "declaration": true,
     "baseUrl": ".",
+    "outDir": "./dist",
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": [
+        "./src/*"
+      ]
     }
   }
 }
