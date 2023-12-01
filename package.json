@@ -6,12 +6,12 @@
   "type": "module",
   "scripts": {
     "start": "node ./dist/index.js",
-    "dev": "tsx watch src/index.ts",
-    "test": "tsx --experimental-test-coverage --test **/__test__.ts",
-    "test:watch": "tsx --test **/__test__.ts",
+    "dev": "tsx watch --env-file=.env src/index.ts",
+    "test": "tsx --experimental-test-coverage --test --env-file=.env ./__tests__/**",
+    "test:watch": "tsx --test --env-file=.env ./__tests__/**",
     "lint": "eslint index.ts",
     "format": "prettier --write --experimental-ternaries ./src",
-    "build": "tsup"
+    "build": "tsc && tsup"
   },
   "keywords": [],
   "author": "",

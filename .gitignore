@@ -2,3 +2,4 @@ node_modules
 .tool-versions
 dist*
 NOTES.md
+.env
