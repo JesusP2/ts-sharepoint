@@ -1,11 +1,11 @@
 export const getToken = async () => {
-  const formData = new FormData();
+  const formData = new URLSearchParams();
   formData.append('grant_type', 'client_credentials');
   formData.append(
     'client_id',
     `${process.env.CLIENT_ID}@${process.env.TENANT_ID}`,
   );
-  formData.append('client_secret', process.env.CLIENT_SECRET);
+  formData.append('client_secret', process.env.CLIENT_SECRET!);
   formData.append(
     'resource',
     `${process.env.RESOURCE}/${process.env.SP_DOMAIN}@${process.env.TENANT_ID}`,

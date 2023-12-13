@@ -33,20 +33,30 @@ export const getToken = async (
   return tokenData;
 };
 
+export function objectValues<T extends { [x: string]: unknown }>(object: T) {
+  return Object.keys(object) as T[keyof T][];
+}
+
+export function objectKeys<T extends Record<string, unknown> | unknown[]>(
+  object: T,
+) {
+  return Object.keys(object) as (keyof T)[];
+}
+
 export function objectEntries<T extends Record<string, unknown>>(object: T) {
   return Object.entries(object) as [keyof T, T[keyof T]][];
 }
 
 // operators
 
-type Equal = 'eq'
-type NotEqual = 'ne'
-type GreaterThan = 'gt'
-type GreaterThanOrEqual = 'ge'
-type LessThan = 'lt'
-type LessThanOrEqual = 'le2'
-type And = 'and'
-type or = 'or'
-type Not = 'not'
-type Has = 'has'
-type In = 'in'
+type Equal = 'eq';
+type NotEqual = 'ne';
+type GreaterThan = 'gt';
+type GreaterThanOrEqual = 'ge';
+type LessThan = 'lt';
+type LessThanOrEqual = 'le2';
+type And = 'and';
+type or = 'or';
+type Not = 'not';
+type Has = 'has';
+type In = 'in';

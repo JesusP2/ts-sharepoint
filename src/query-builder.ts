@@ -1,8 +1,4 @@
-/*
- * Copied code from: https://github.com/techniq/odata-query
- * */
-
-const COMPARISON_OPERATORS = ['eq', 'ne', 'gt', 'ge', 'lt', 'le'];
+const COMPARISON_OPERATORS = ['eq', 'ne', 'gt', 'ge', 'lt', 'le', 'has', 'in'];
 const LOGICAL_OPERATORS = ['and', 'or', 'not'];
 const COLLECTION_OPERATORS = ['any', 'all'];
 const BOOLEAN_FUNCTIONS = ['startswith', 'endswith', 'contains'];
@@ -25,6 +21,7 @@ export type Select<T> = string | string[] | keyof T | Array<keyof T>;
 export type NestedOrderBy<T> = {
   [P in keyof T]?: T[P] extends Array<infer E> ? OrderBy<E> : OrderBy<T[P]>;
 };
+export type OrderByOptions<T> = keyof T | [keyof T, 'asc' | 'desc'];
 export type OrderBy<T> =
   | string
   | OrderByOptions<T>
@@ -57,7 +54,6 @@ export type Aggregate =
   | string
   | { [propertyName: string]: { with: StandardAggregateMethods; as: string } };
 
-export type OrderByOptions<T> = keyof T | [keyof T, 'asc' | 'desc'];
 export type ExpandOptions<T> = {
   select: Select<T>;
   filter: Filter<T>;
@@ -105,6 +101,7 @@ export const duration = (value: string): Duration => ({
   type: 'duration',
   value,
 });
+
 export const binary = (value: string): Binary => ({ type: 'binary', value });
 export const json = (value: PlainObject): Json => ({ type: 'json', value });
 export const alias = (name: string, value: PlainObject): Alias => ({
@@ -129,7 +126,7 @@ export type QueryOptions<T> = ExpandOptions<T> & {
 
 export const ITEM_ROOT = '';
 
-export default function <T>({
+export function queryBuilder<T>({
   select: $select,
   search: $search,
   skiptoken: $skiptoken,
@@ -337,7 +334,11 @@ function buildFilter<T>(
                   return;
                 }
 
-                if (COMPARISON_OPERATORS.indexOf(op) !== -1) {
+                if (
+                  COMPARISON_OPERATORS.indexOf(op) !== -1 &&
+                  op !== 'has' &&
+                  op !== 'in'
+                ) {
                   result.push(
                     `${propName} ${op} ${handleValue(value[op], aliases)}`,
                   );
@@ -662,7 +663,7 @@ function buildAggregate(aggregate: Aggregate | Aggregate[]) {
 
 function buildGroupBy<T>(groupBy: GroupBy<T>) {
   if (!groupBy.properties) {
-    throw new Error('\'properties\' property required for groupBy');
+    throw new Error("'properties' property required for groupBy");
   }
 
   let result = `(${groupBy.properties.join(',')})`;

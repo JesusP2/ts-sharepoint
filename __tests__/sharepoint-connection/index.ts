@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { getToken, type ErrorSchema } from './helpers';
+import { getToken, type ErrorSchema } from '../helpers';
 
 const listUrl = `${process.env.SP_URL}/_api/web/lists/getbytitle('test')/items`;
 test.describe('Sharepoint tests', async () => {
@@ -16,7 +16,7 @@ test.describe('Sharepoint tests', async () => {
       },
     });
     if (!res.ok) {
-      const msg = `Status: ${res.status}, Status text: ${res.statusText}`
+      const msg = `Status: ${res.status}, Status text: ${res.statusText}`;
       assert.fail(msg);
     }
     const data = (await res.json()) as { value: unknown[] };
